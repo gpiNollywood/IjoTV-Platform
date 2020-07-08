@@ -44,17 +44,37 @@
 							</a>
 
 							<div class="sign__group">
-								<input type="text" class="sign__input" name="email"laceholder="Email">
+								<input type="text" class="sign__input" name="email" placeholder="Email">
 							</div>
 
 							<div class="sign__group">
-								<input type="password" name="password" class="sign__input" placeholder="Password">
+								<span class="hidenshow">
+									Show
+								</span>
+								<input type="password" name="password" id="password" class="sign__input" placeholder="Password">
+								
 							</div>
 
-							<div class="sign__group sign__group--checkbox">
-								<input id="remember" name="remember" type="checkbox" checked="checked">
-								<label for="remember">Remember Me</label>
+							<div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+								<div>
+									<div class="sign__group sign__group--checkbox">
+										<input id="remember" name="remember" type="checkbox" checked="checked">
+										<label for="remember">Remember Me</label>	
+									</div>
+								</div>
+
+								<div>
+									<div class="sign__group sign__group--checkbox">
+										<input id="show_password" name="show_password" type="checkbox">
+									 <a href="javascript:void(0);" style="padding-left: 1rem;"> <label for="show_password" id="showhide_password">Show Password</label>	</a>
+									</div>
+								</div>
 							</div>
+
+							<!--<div class="sign__group sign__group--checkbox">
+								<input id="remember" name="remember" type="checkbox" checked="checked">
+								<label for="remember">Remember Me</label>	
+							</div>-->
 							
 							<button class="sign__btn" name="login" type="button">Sign in</button>
 
@@ -69,6 +89,30 @@
 		</div>
 	</div>
 
+	<script>
+		document.addEventListener('click', function(event)
+		{
+			if(event.target.id !=='show_password') return;
+			// get password field using vanilla
+			var password = document.querySelector('#password');
+			var hs = document.querySelector('#showhide_password');
+			if(!password) return;
+
+			//
+			var ch = hs.innerHTML;
+			// check for checkbox
+
+			if(event.target.checked){
+				password.type = 'text';
+				hs.innerHTML = 'Hide Password';
+			}else
+			{
+				password.type = 'password';
+				hs.innerHTML = 'Show Password';
+			}
+
+		}, false);
+	</script>
 	<!-- JS -->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
