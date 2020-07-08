@@ -55,10 +55,22 @@
 							</div>
 
 							<div class="sign__group">
-								<input type="password" class="sign__input" name="password" placeholder="Password">
+								<input type="password" class="sign__input" id="password" name="password" placeholder="Password">
 							</div>
 							<div class="sign__group">
-								<input type="password" class="sign__input" name="password_confirm" placeholder="Confirm Password">
+								<input type="password" class="sign__input" id="password_confirm" name="password_confirm" placeholder="Confirm Password">
+							</div>
+							<div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+								<div>
+									
+								</div>
+
+								<div>
+									<div class="sign__group sign__group--checkbox">
+										<input id="show_password" name="show_password" type="checkbox">
+									 <a href="javascript:void(0);" style="padding-left: 1rem;"> <label for="show_password" id="showhide_password">Show Password</label>	</a>
+									</div>
+								</div>
 							</div>
 
 							<div class="sign__group sign__group--checkbox">
@@ -77,7 +89,33 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		document.addEventListener('click', function(event)
+		{
+			if(event.target.id !=='show_password') return;
+			// get password field using vanilla
+			var password = document.querySelector('#password');
+			var password_confirm = document.querySelector('#password_confirm');
+			var hs = document.querySelector('#showhide_password');
+			if(!password) return;
 
+			//
+			var ch = hs.innerHTML;
+			// check for checkbox
+
+			if(event.target.checked){
+				password.type = 'text';
+				password_confirm.type = 'text';
+				hs.innerHTML = 'Hide Password';
+			}else
+			{
+				password.type = 'password';
+				password_confirm.type = 'password';
+				hs.innerHTML = 'Show Password';
+			}
+
+		}, false);
+	</script>
 	<!-- JS -->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
