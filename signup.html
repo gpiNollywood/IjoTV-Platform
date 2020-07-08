@@ -48,10 +48,10 @@
 							</div>-->
 
 							<div class="sign__group">
-								<input type="text" class="sign__input" name="email" placeholder="Email">
+								<input type="text" class="sign__input" id="email" name="email" placeholder="Email">
 							</div>
 							<div class="sign__group">
-								<input type="tel" pattern="[0-9]*" name="phone" class="sign__input" placeholder="Phone Number">
+								<input type="tel" pattern="[0-9]*" name="phone" id="phone" class="sign__input" placeholder="Phone Number">
 							</div>
 
 							<div class="sign__group">
@@ -72,6 +72,7 @@
 									</div>
 								</div>
 							</div>
+							<p role="status" style="color:skyblue"></p>
 
 							<div class="sign__group sign__group--checkbox">
 								<input id="remember" name="remember" type="checkbox" checked="checked">
@@ -115,6 +116,72 @@
 			}
 
 		}, false);
+
+
+		// Detect form submit events
+document.addEventListener('submit', function (event) {
+
+// Prevent default form submit
+event.preventDefault();
+
+var email = document.querySelector('#email');
+var phone = document.querySelector('#phone');
+var password = document.querySelector('#password');
+var password_confirm = document.querySelector('#password_confirm');
+
+
+// Ignore forms that are actively being submitted
+if (event.target.classList.contains('submitting')) return;
+
+// Show submitting message
+var status = event.target.querySelector('[role="status"');
+//
+if(email.value =='')
+{
+	status.textContent = 'Email can\'t be empty...';
+}else if(phone.value =='')
+{
+	status.textContent = 'Phone can\'t be empty...';
+}
+else if(password.value =='')
+{
+	status.textContent = 'Password can\'t be empty...';
+}
+else if(password_confirm.value =='')
+{
+	status.textContent = 'Confirm password can\'t be empty...';
+}
+else
+{
+
+	status.textContent = 'Submitting...';	
+
+// Add form .submitting state class for styling
+event.target.classList.add('submitting');
+
+// Submit form data to an API
+// (we're simulating this here with setTimeout())
+setTimeout(function () {
+
+	// Once API response returns, re-enable the form
+	// (again, simulated here)
+
+	// Remove the .submitting state class
+	event.target.classList.remove('submitting');
+
+	// Show a success message
+	status.textContent = 'Account Created Successfully!';
+
+	// clear fields
+	event.target.reset();
+
+}, 3000);
+
+}
+
+
+
+});
 	</script>
 	<!-- JS -->
 	<script src="js/jquery-3.3.1.min.js"></script>

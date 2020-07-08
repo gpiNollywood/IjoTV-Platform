@@ -44,15 +44,11 @@
 							</a>
 
 							<div class="sign__group">
-								<input type="text" class="sign__input" name="email" placeholder="Email">
+								<input type="text" class="sign__input" id="email" name="email" placeholder="Email">
 							</div>
 
 							<div class="sign__group">
-								<span class="hidenshow">
-									Show
-								</span>
 								<input type="password" name="password" id="password" class="sign__input" placeholder="Password">
-								
 							</div>
 
 							<div style="display: grid; grid-template-columns: repeat(2, 1fr);">
@@ -71,12 +67,13 @@
 								</div>
 							</div>
 
+							<p role="status" style="color:skyblue"></p>
 							<!--<div class="sign__group sign__group--checkbox">
 								<input id="remember" name="remember" type="checkbox" checked="checked">
 								<label for="remember">Remember Me</label>	
 							</div>-->
 							
-							<button class="sign__btn" name="login" type="button">Sign in</button>
+							<button class="sign__btn" name="login" type="submit">Sign in</button>
 
 							<span class="sign__text">Don't have an account? <a href="signup.html">Sign up!</a></span>
 
@@ -112,6 +109,64 @@
 			}
 
 		}, false);
+
+		///
+
+// Detect form submit events
+document.addEventListener('submit', function (event) {
+
+// Prevent default form submit
+event.preventDefault();
+
+var email = document.querySelector('#email');
+var password = document.querySelector('#password');
+
+
+// Ignore forms that are actively being submitted
+if (event.target.classList.contains('submitting')) return;
+
+// Show submitting message
+var status = event.target.querySelector('[role="status"');
+//
+if(email.value =='')
+{
+	status.textContent = 'Email can\'t be empty...';
+}else if(password.value =='')
+{
+	status.textContent = 'Password can\'t be empty...';
+}
+else
+{
+
+	status.textContent = 'Submitting...';	
+
+// Add form .submitting state class for styling
+event.target.classList.add('submitting');
+
+// Submit form data to an API
+// (we're simulating this here with setTimeout())
+setTimeout(function () {
+
+	// Once API response returns, re-enable the form
+	// (again, simulated here)
+
+	// Remove the .submitting state class
+	event.target.classList.remove('submitting');
+
+	// Show a success message
+	status.textContent = 'Success!';
+
+	// clear fields
+	event.target.reset();
+
+}, 3000);
+
+}
+
+
+
+});
+
 	</script>
 	<!-- JS -->
 	<script src="js/jquery-3.3.1.min.js"></script>
